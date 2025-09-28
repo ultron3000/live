@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Channel List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b0b0b;
+      color: #f3f4f6;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #f59e0b;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #1f2937;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      text-align: center;
+      transition: transform .2s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+    }
+    .card-title {
+      padding: 8px;
+      font-size: 14px;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dummy Channels</h1>
+  <div class="grid">
+
+    <div class="card">
+      <a href="player.html?title=Star Movies Select&video=https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Movies_Select_HD_BTS/output/index.mpd?__hdnea__=st=1758996009~exp=1759082409~acl=/*~hmac=e996fb99553276c5c9d590bdc9cb920057f2c51c8f9e76b33b465a9a660318f7">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Star_Movies_Select_HD_Logo.png/320px-Star_Movies_Select_HD_Logo.png" alt="">
+        <div class="card-title">Star Movies Select (DASH)</div>
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="player.html?title=Bigg Boss 24x7&video=https://live09p.hotstar.com:443/mp1/inallow-bigboss-hin-s19-24x7/976ce76c773a4fe190aa5e247691f8cb/index_4.m3u8">
+        <img src="https://upload.wikimedia.org/wikipedia/en/4/47/Bigg_Boss_Hindi_Logo.png" alt="">
+        <div class="card-title">Bigg Boss 24x7 (HLS)</div>
+      </a>
+    </div>
+
+    <div class="card">
+      <a href="player.html?title=Star Movies&video=https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Movies_BTS/output/index.mpd?__hdnea__=st=1758996009~exp=1759082409~acl=/*~hmac=e996fb99553276c5c9d590bdc9cb920057f2c51c8f9e76b33b465a9a660318f7">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Star_Movies_HD_logo.svg/320px-Star_Movies_HD_logo.svg.png" alt="">
+        <div class="card-title">Star Movies (DASH)</div>
+      </a>
+    </div>
+
+  </div>
+</body>
+</html>

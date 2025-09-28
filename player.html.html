@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Universal Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
+  <style>
+    body {
+      margin:0;
+      background:#000;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+    video {
+      width:90%;
+      max-width:1000px;
+      background:#000;
+    }
+    .title {
+      position:absolute;
+      top:10px;
+      left:10px;
+      color:#fff;
+      font-family:sans-serif;
+      font-size:16px;
+      background:rgba(0,0,0,0.5);
+      padding:4px 8px;
+      border-radius:4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="title" id="title"></div>
+  <video id="video" controls autoplay playsinline></video>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const url = params.get('video') || '';
+const title = params.get('title') || '';
+
+document.getElementById('title').textContent = title;
+
+const video = document.getElementById('video');
+
+function playMP4(src){
+  video.src = src;
+  video.play().catch(()=>{});
+}
+
+function playHLS(src){
+  if(Hls.isSupported()){
+    const hls = new Hls();
+    hls.loadSource(src);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, ()=>video.play().catch(()=>{}));
+  } else if(video.canPlayType('application/vnd.apple.mpegurl')){
+    video.src = src;
+    video.play().catch(()=>{});
+  } else {
+    alert('HLS not supported');
+  }
+}
+
+function playDASH(src){
+  const player = dashjs.MediaPlayer().create();
+  player.initialize(video, src, true);
+  // ---- add DRM licence server here if you have one ----
+  /*
+  player.setProtectionData({
+    "com.widevine.alpha": {
+      serverURL: "https://your-licence-server-url.com/widevine",
+      httpRequestHeaders: {
+        // Authorization: 'Bearer token'
+      }
+    }
+  });
+  */
+}
+
+if(!url){
+  alert('No video URL provided (?video=)');
+} else if(url.toLowerCase().includes('.m3u8')){
+  playHLS(url);
+} else if(url.toLowerCase().includes('.mpd')){
+  playDASH(url);
+} else {
+  playMP4(url);
+}
+</script>
+</body>
+</html>
